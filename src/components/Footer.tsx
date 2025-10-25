@@ -23,7 +23,7 @@ export default function Footer() {
       {/* GitHub */}
       <div className="flex items-center space-x-2">
         <a
-          href="https://github.com/NoemiPuerto"
+          href="https://github.com/NoemiPuerto/MichiWeatherReact"
           target="_blank"
           rel="noopener noreferrer"
           aria-label="GitHub"
