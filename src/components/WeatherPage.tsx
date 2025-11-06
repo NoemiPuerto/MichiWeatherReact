@@ -1,12 +1,14 @@
+import { useState } from 'react'
 import WeatherCard from './WeatherCard'
 import ForecastHourly from './ForecastHourly'
+import ForecastWeekly from './ForecastWeekly'
 import Stats from './Stats'
 
 export default function WeatherPage() {
-  
+  const [viewMode, setViewMode] = useState<'hoy' | 'semana'>('hoy')
 
   return (
-    <main className={`container mx-auto my-8 px-4 `}>
+    <main className="container mx-auto my-8 px-4">
       <div className="flex flex-col lg:flex-row gap-8 items-center">
 
         {/* Columna izquierda */}
@@ -25,15 +27,33 @@ export default function WeatherPage() {
 
           {/* Botones "Hoy" / "Semana" */}
           <div className="flex gap-4">
-            <button className="bg-[#365d39] hover:bg-green-700 text-white px-10 py-2 rounded-lg font-semibold">Hoy</button>
-            <button className="bg-gray-300 hover:bg-gray-400 dark:bg-gray-700 dark:hover:bg-gray-600 text-black dark:text-white px-4 py-2 rounded-lg font-semibold">Semana</button>
+            <button
+              onClick={() => setViewMode('hoy')}
+              className={`px-10 py-2 rounded-lg font-semibold ${
+                viewMode === 'hoy'
+                  ? 'bg-[#365d39] text-white hover:bg-green-700'
+                  : 'bg-gray-300 text-black dark:bg-gray-700 dark:text-white hover:bg-gray-400 dark:hover:bg-gray-600'
+              }`}
+            >
+              Hoy
+            </button>
+            <button
+              onClick={() => setViewMode('semana')}
+              className={`px-4 py-2 rounded-lg font-semibold ${
+                viewMode === 'semana'
+                  ? 'bg-[#365d39] text-white hover:bg-green-700'
+                  : 'bg-gray-300 text-black dark:bg-gray-700 dark:text-white hover:bg-gray-400 dark:hover:bg-gray-600'
+              }`}
+            >
+              Semana
+            </button>
           </div>
 
-          {/* Pronóstico horario */}
-          <ForecastHourly/>
+          {/* Pronóstico dinámico */}
+          {viewMode === 'hoy' ? <ForecastHourly /> : <ForecastWeekly />}
 
           {/* Indicadores */}
-          <Stats propLLuvia={0} propHumedad={0} propViento={0}/>
+          <Stats propLLuvia={80} propHumedad={70} propViento={15} />
 
         </div>
       </div>
