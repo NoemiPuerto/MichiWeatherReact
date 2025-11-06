@@ -51,16 +51,16 @@ export default function ForecastHourly() {
   if (loading) return <p>Cargando...</p>
 
   return (
-    <div className="flex gap-4 overflow-x-auto py-2">
+    <div className="flex gap-4 overflow-x-auto py-2 px-2">
       {hours.map((hour, idx) => (
         <div key={idx} className="flex flex-col items-center min-w-[80px]">
-          <p>{hour.label}</p>
+          <p className="text-sm">{hour.label}</p>
           <img
            src={hour.icon}
-            alt={hour.icon}
-            className="w-30 h-30"
+            alt={hour.label}
+            className="w-[30px] h-[30px]"
           />
-          <p>{hour.temp}°</p>
+          <p className="text-sm">{hour.temp}°</p>
         </div>
       ))}
     </div>
