@@ -16,15 +16,15 @@ export default function Stats({ propLLuvia, propHumedad, propViento }: StatsProp
   ]
 
   return (
-    <div className="flex gap-6 justify-center">
+    <div className="flex gap-6 justify-center flex-wrap lg:justify-start">
       {stats.map((stat, idx) => (
-        <div key={idx} className="flex flex-col items-center">
+        <div key={idx} className="flex flex-col items-center px-2">
           <img
             src={stat.icon}
             alt={stat.alt}
-            className="w-12 h-12"
+            className="w-10 h-10 sm:w-12 sm:h-12"
           />
-          <p className="mt-1 font-semibold">{stat.value}</p>
+          <p className="mt-1 font-semibold text-sm sm:text-base">{stat.value}</p>
         </div>
       ))}
     </div>
