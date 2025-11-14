@@ -1,0 +1,100 @@
+{
+  "cities": [
+    {
+      "id": 1,
+      "name": "Cancún",
+      "country": "MX",
+      "current": {
+        "temp": 27,
+        "temp_min": 25,
+        "temp_max": 29,
+        "condition": "Despejado",
+        "humidity": 74,
+        "wind": 14,
+        "uv_index": 8,
+        "icon": "sun"
+      },
+      "hourly": [
+        { "time": "06:00", "temp": 25, "icon": "sunrise" },
+        { "time": "09:00", "temp": 27, "icon": "sun" },
+        { "time": "12:00", "temp": 29, "icon": "sun" },
+        { "time": "15:00", "temp": 28, "icon": "sun" },
+        { "time": "18:00", "temp": 27, "icon": "sunset" },
+        { "time": "21:00", "temp": 26, "icon": "moon" }
+      ],
+      "weekly": [
+        { "day": "Lun", "temp_min": 24, "temp_max": 29, "icon": "sun" },
+        { "day": "Mar", "temp_min": 25, "temp_max": 30, "icon": "sun" },
+        { "day": "Mié", "temp_min": 24, "temp_max": 28, "icon": "cloud-sun" },
+        { "day": "Jue", "temp_min": 23, "temp_max": 29, "icon": "rain" },
+        { "day": "Vie", "temp_min": 24, "temp_max": 28, "icon": "sun" },
+        { "day": "Sáb", "temp_min": 25, "temp_max": 30, "icon": "sun" },
+        { "day": "Dom", "temp_min": 24, "temp_max": 29, "icon": "cloud-sun" }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Ciudad de México",
+      "country": "MX",
+      "current": {
+        "temp": 18,
+        "temp_min": 14,
+        "temp_max": 20,
+        "condition": "Nublado",
+        "humidity": 58,
+        "wind": 10,
+        "uv_index": 5,
+        "icon": "cloud"
+      },
+      "hourly": [
+        { "time": "06:00", "temp": 14, "icon": "cloud" },
+        { "time": "09:00", "temp": 16, "icon": "cloud-sun" },
+        { "time": "12:00", "temp": 19, "icon": "sun" },
+        { "time": "15:00", "temp": 20, "icon": "sun" },
+        { "time": "18:00", "temp": 17, "icon": "cloud" },
+        { "time": "21:00", "temp": 15, "icon": "cloud" }
+      ],
+      "weekly": [
+        { "day": "Lun", "temp_min": 12, "temp_max": 20, "icon": "cloud" },
+        { "day": "Mar", "temp_min": 13, "temp_max": 21, "icon": "sun" },
+        { "day": "Mié", "temp_min": 12, "temp_max": 22, "icon": "sun" },
+        { "day": "Jue", "temp_min": 11, "temp_max": 19, "icon": "rain" },
+        { "day": "Vie", "temp_min": 12, "temp_max": 21, "icon": "cloud-sun" },
+        { "day": "Sáb", "temp_min": 13, "temp_max": 22, "icon": "sun" },
+        { "day": "Dom", "temp_min": 12, "temp_max": 20, "icon": "cloud" }
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Monterrey",
+      "country": "MX",
+      "current": {
+        "temp": 22,
+        "temp_min": 19,
+        "temp_max": 26,
+        "condition": "Medio nublado",
+        "humidity": 52,
+        "wind": 18,
+        "uv_index": 6,
+        "icon": "cloud-sun"
+      },
+      "hourly": [
+        { "time": "06:00", "temp": 19, "icon": "cloud" },
+        { "time": "09:00", "temp": 21, "icon": "cloud-sun" },
+        { "time": "12:00", "temp": 24, "icon": "sun" },
+        { "time": "15:00", "temp": 26, "icon": "sun" },
+        { "time": "18:00", "temp": 24, "icon": "cloud-sun" },
+        { "time": "21:00", "temp": 21, "icon": "cloud" }
+      ],
+      "weekly": [
+        { "day": "Lun", "temp_min": 18, "temp_max": 27, "icon": "cloud-sun" },
+        { "day": "Mar", "temp_min": 19, "temp_max": 28, "icon": "sun" },
+        { "day": "Mié", "temp_min": 18, "temp_max": 30, "icon": "sun" },
+        { "day": "Jue", "temp_min": 17, "temp_max": 26, "icon": "rain" },
+        { "day": "Vie", "temp_min": 18, "temp_max": 27, "icon": "cloud" },
+        { "day": "Sáb", "temp_min": 19, "temp_max": 29, "icon": "sun" },
+        { "day": "Dom", "temp_min": 18, "temp_max": 27, "icon": "cloud-sun" }
+      ]
+    }
+  ]
+}
