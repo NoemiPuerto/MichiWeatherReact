@@ -2,7 +2,6 @@ import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { FiUser, FiMenu, FiMoon, FiSun, FiX, FiSearch } from 'react-icons/fi'
 
-
 export default function Navbar() {
   const [dark, setDark] = useState<boolean>(() => {
     if (typeof window === 'undefined') return false
@@ -12,16 +11,13 @@ export default function Navbar() {
   const [query, setQuery] = useState('')
   const toggleRef = useRef<HTMLButtonElement | null>(null)
 
-
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light')
   }, [dark])
 
-
   useEffect(() => {
     if (toggleRef.current) toggleRef.current.setAttribute('aria-pressed', dark ? 'true' : 'false')
   }, [dark])
-
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault()
@@ -32,10 +28,7 @@ export default function Navbar() {
     }
   }
 
-
-  // Icons use accent color for visual uniformity
   const iconClass = 'text-[var(--accent)]'
-
 
   return (
     <header className="w-full fixed top-0 left-0 z-40 bg-[var(--panel)] dark:bg-[var(--panel)] shadow-md transition-colors duration-300">
@@ -47,7 +40,6 @@ export default function Navbar() {
             </span>
           </Link>
 
-
           <nav className="hidden lg:flex items-center gap-6 ml-6">
             <Link to="/" className="font-semibold text-sm text-[var(--dark)] dark:text-[var(--white)] hover:text-[var(--accent)] transition">
               Inicio
@@ -58,9 +50,7 @@ export default function Navbar() {
           </nav>
         </div>
 
-
         <div className="flex items-center gap-3">
-          {/* Search (visible en >= sm) */}
           <form onSubmit={handleSearch} className="hidden sm:flex items-center bg-[var(--white)]/80 dark:bg-[var(--glass)] rounded-full px-3 py-1 shadow-michi-1">
             <FiSearch className={`${iconClass} mr-2`} />
             <input
@@ -72,8 +62,6 @@ export default function Navbar() {
             />
           </form>
 
-
-          {/* Theme toggle (icon color consistent) */}
           <button
             ref={toggleRef}
             onClick={() => setDark((s) => !s)}
@@ -84,14 +72,10 @@ export default function Navbar() {
             {dark ? <FiSun className={iconClass} /> : <FiMoon className={iconClass} />}
           </button>
 
-
-          {/* Perfil (siempre visible) - same icon color */}
           <Link to="/perfil" title="Perfil" className="h-9 w-9 rounded-full grid place-items-center hover:shadow-michi-1 transition bg-transparent">
             <FiUser className={iconClass} />
           </Link>
 
-
-          {/* Mobile menu */}
           <button
             onClick={() => setMenuOpen(!menuOpen)}
             className="h-9 w-9 inline-flex items-center justify-center lg:hidden hover:bg-[var(--accent)]/10 transition rounded"
@@ -101,7 +85,6 @@ export default function Navbar() {
           </button>
         </div>
       </div>
-
 
       {menuOpen && (
         <div className="lg:hidden bg-[var(--panel)] dark:bg-[var(--panel)] border-t border-[var(--glass)] py-4 px-6 space-y-3 animate-fade-in">

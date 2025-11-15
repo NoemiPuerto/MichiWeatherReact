@@ -9,10 +9,9 @@
   --accent: #2E7D1E;
   --muted: #3A4C3A;
   --dark: #133217;
-  --white: #636363;
+  --white: #6B6B6B;
   --glass: rgba(104, 104, 104, 0.06);
 }
-
 
 /* 🌑 Modo oscuro */
 [data-theme='dark'] {
@@ -24,13 +23,11 @@
   --glass: rgba(255,255,255,0.04);
 }
 
-
 /* Base */
 @layer base {
   html, body, #root {
     height: 100%;
   }
-
 
   body {
     font-family: 'Quicksand', 'League Spartan', Inter, system-ui, sans-serif;
@@ -39,12 +36,10 @@
     transition: background-color .36s cubic-bezier(.2,.9,.2,1), color .28s;
   }
 
-
   [data-theme='dark'] body {
     color: var(--white);
   }
 }
-
 
 /* Utilidades */
 @layer components {
@@ -52,13 +47,17 @@
     @apply mx-auto w-[94%] max-w-[1200px];
   }
 
-
+  /* ocultar scrollbar en elementos con .scroll-hidden */
   .scroll-hidden::-webkit-scrollbar {
     display: none;
   }
+  .scroll-hidden {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+  }
 }
 
-
+/* Sombras */
 @layer utilities {
   .shadow-michi-1 {
     box-shadow: 0 3px 10px rgba(0,0,0,0.08);
