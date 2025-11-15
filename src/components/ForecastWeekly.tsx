@@ -1,5 +1,3 @@
-import React from 'react'
-
 type Day = {
   day: string
   icon?: string
