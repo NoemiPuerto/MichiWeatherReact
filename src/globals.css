@@ -15,9 +15,9 @@
 
 /* 🌑 Modo oscuro */
 [data-theme='dark'] {
-  --bg: #08160F;
-  --panel: #123221;
-  --accent: #8CF800;
+  --bg: #09160f;
+  --panel: #0a4d28;
+  --accent: #1c9d1c;
   --muted: #9DB69A;
   --white: #F2F7F1;
   --glass: rgba(255,255,255,0.04);
