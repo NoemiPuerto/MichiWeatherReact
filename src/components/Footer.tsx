@@ -48,7 +48,7 @@ export default function Footer() {
             { name: 'Maritza', url: 'https://github.com/Mezzikeen11' },
             { name: 'Luz', url: 'https://github.com/LuzElizabeeth' },
             { name: 'Rodolfo', url: 'https://github.com/Atkis1' },
-            { name: 'Magdalena', url: 'https://github.com/NoemiPuerto' },
+            { name: 'Noemi', url: 'https://github.com/NoemiPuerto' },
           ].map((dev) => (
             <a
               key={dev.name}
