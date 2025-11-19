@@ -51,7 +51,7 @@ export default function Navbar() {
               </button>
 
               {locOpen && (
-                <div className="absolute left-0 mt-2 w-48 bg-[var(--panel)] dark:bg-[var(--glass)] shadow-michi-1 rounded-xl p-2 z-50">
+                <div className="absolute left-0 mt-2 w-48 bg-[var(--panel)] shadow-michi-1 rounded-xl p-2 z-50">
                   <p className="px-3 py-1 text-xs text-[var(--accent)] font-semibold">Recomendadas</p>
 
                   <div className="flex flex-col">
