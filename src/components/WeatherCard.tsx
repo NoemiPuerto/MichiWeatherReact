@@ -1,4 +1,4 @@
-import { weatherCardMap } from "../../utils/weatherCardMap"
+import { weatherCardMap } from "../utils/weatherCardMap"
 
 interface WeatherCardProps {
   location: string
@@ -6,13 +6,11 @@ interface WeatherCardProps {
   temp: number
   max: number
   min: number
-  conditionIconKey: string // Nueva prop: Clave para el mapeo (sol, lluvia, nublado, parcial)
 }
 
-export default function WeatherCard({ location, condition, temp, max, min, conditionIconKey }: WeatherCardProps) {
-  // Obtener imágenes usando la clave del icono de la API
-  console.log("WeatherCard - conditionIconKey:", conditionIconKey);
-  const { fondo, michi } = weatherCardMap[conditionIconKey.toLowerCase()] ?? {}
+export default function WeatherCard({ location, condition, temp, max, min }: WeatherCardProps) {
+  // Obtener imágenes según la condición
+  const { fondo, michi } = weatherCardMap[condition.toLowerCase()] ?? {}
 
   return (
     <div className="relative flex flex-col items-center w-full max-w-[520px] mx-auto text-center">

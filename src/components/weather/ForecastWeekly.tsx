@@ -1,7 +1,7 @@
 import type { IconType } from "react-icons"
 import { WiDaySunny, WiCloud, WiRain, WiNightClear } from "react-icons/wi"
 // Importamos el tipo desde el nuevo archivo de tipos
-import type { WeeklyForecastDay } from "../../types/weather" 
+import type { WeeklyForecastDay } from "../types/weather" 
 
 // Props
 interface ForecastWeeklyProps {
