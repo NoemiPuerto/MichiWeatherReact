@@ -1,20 +1,20 @@
-import type { IconType } from "react-icons"
-import { WiDaySunny, WiCloud, WiRain, WiNightClear } from "react-icons/wi"
+import type { IconType } from "react-icons";
+import { WiDaySunny, WiCloud, WiRain, WiNightClear } from "react-icons/wi";
 
 // Tipo del pronóstico diario
 export interface ForecastDay {
-  day: string
-  icon?: string  // ahora opcional
-  max: number
-  min: number
+  day: string;
+  icon?: string;
+  max: number;
+  min: number;
 }
 
 // Props
 interface ForecastWeeklyProps {
-  data?: ForecastDay[]
+  data?: ForecastDay[];
 }
 
-// Mapeo de nombres del JSON a React Icons
+// Mapeo de nombres del JSON → React Icons
 const iconMap: Record<string, IconType> = {
   sol: WiDaySunny,
   nublado: WiCloud,
@@ -22,16 +22,17 @@ const iconMap: Record<string, IconType> = {
   noche: WiNightClear,
   llovizna: WiRain,
   granizo: WiRain,
-}
+};
 
 export default function ForecastWeekly({ data = [] }: ForecastWeeklyProps) {
-  if (!Array.isArray(data) || data.length === 0) return null
+  if (!Array.isArray(data) || data.length === 0) return null;
 
   return (
     <section aria-label="Pronóstico semanal" className="w-full">
       <div className="flex gap-4 min-w-max">
         {data.map((d, i) => {
-          const IconComponent = d.icon ? iconMap[d.icon] : null
+          const IconComponent = d.icon ? iconMap[d.icon] : null;
+
           return (
             <div
               key={i}
@@ -53,9 +54,9 @@ export default function ForecastWeekly({ data = [] }: ForecastWeeklyProps) {
                 <span className="text-sm text-[var(--muted)]">{d.min}°</span>
               </div>
             </div>
-          )
+          );
         })}
       </div>
     </section>
-  )
+  );
 }

@@ -1,34 +1,30 @@
-import { useEffect, useRef, useState } from 'react'
-import { Link } from 'react-router-dom'
-import { FiUser, FiMenu, FiMoon, FiSun, FiX, FiSearch } from 'react-icons/fi'
+// src/components/Navbar.tsx
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { FiUser, FiMenu, FiMoon, FiSun, FiX } from "react-icons/fi";
+import SearchBar from "./SearchBar";
+import { recommendedLocations } from "../utils/recommendedLocations";
 
 export default function Navbar() {
+  const navigate = useNavigate();
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [locOpen, setLocOpen] = useState(false);
   const [dark, setDark] = useState<boolean>(() => {
-    if (typeof window === 'undefined') return false
-    return document.documentElement.getAttribute('data-theme') === 'dark'
-  })
-  const [menuOpen, setMenuOpen] = useState(false)
-  const [query, setQuery] = useState('')
-  const toggleRef = useRef<HTMLButtonElement | null>(null)
+    if (typeof window === "undefined") return false;
+    return document.documentElement.getAttribute("data-theme") === "dark";
+  });
 
-  useEffect(() => {
-    document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light')
-  }, [dark])
+  // maneja selección desde SearchBar
+  const handleSelectCity = (cityName: string) => {
+    // navegar a ruta que carga WeatherPage por city
+    navigate(`/weather/${encodeURIComponent(cityName)}`);
+  };
 
-  useEffect(() => {
-    if (toggleRef.current) toggleRef.current.setAttribute('aria-pressed', dark ? 'true' : 'false')
-  }, [dark])
-
-  const handleSearch = (e: React.FormEvent) => {
-    e.preventDefault()
-    if (query.trim() !== '') {
-      // placeholder: reemplaza por navegación / búsqueda real
-      alert(`Buscando: ${query}`)
-      setQuery('')
-    }
-  }
-
-  const iconClass = 'text-[var(--accent)]'
+  // maneja selección desde el dropdown de Ubicaciones
+  const handleSelectRecommended = (locQuery: string) => {
+    navigate(`/weather/${encodeURIComponent(locQuery)}`);
+    setLocOpen(false);
+  };
 
   return (
     <header className="w-full fixed top-0 left-0 z-40 bg-[var(--panel)] dark:bg-[var(--panel)] shadow-md transition-colors duration-300">
@@ -44,36 +40,57 @@ export default function Navbar() {
             <Link to="/" className="font-semibold text-sm text-[var(--dark)] dark:text-[var(--white)] hover:text-[var(--accent)] transition">
               Inicio
             </Link>
-            <Link to="/ubicaciones" className="font-semibold text-sm text-[var(--dark)] dark:text-[var(--white)] hover:text-[var(--accent)] transition">
-              Ubicaciones
-            </Link>
+
+            {/* Ubicaciones: botón que abre dropdown interno */}
+            <div className="relative">
+              <button
+                onClick={() => setLocOpen((s) => !s)}
+                className="font-semibold text-sm text-[var(--dark)] dark:text-[var(--white)] hover:text-[var(--accent)] transition"
+              >
+                Ubicaciones
+              </button>
+
+              {locOpen && (
+                <div className="absolute left-0 mt-2 w-48 bg-[var(--panel)] dark:bg-[var(--glass)] shadow-michi-1 rounded-xl p-2 z-50">
+                  <p className="px-3 py-1 text-xs text-[var(--accent)] font-semibold">Recomendadas</p>
+
+                  <div className="flex flex-col">
+                    {recommendedLocations.map((loc, i) => (
+                      <button
+                        key={i}
+                        onClick={() => handleSelectRecommended(loc.name)}
+                        className="text-left px-3 py-2 text-sm hover:bg-[var(--accent)]/10 rounded-lg transition"
+                      >
+                        {loc.name}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
           </nav>
         </div>
 
         <div className="flex items-center gap-3">
-          <form onSubmit={handleSearch} className="hidden sm:flex items-center bg-[var(--white)]/80 dark:bg-[var(--glass)] rounded-full px-3 py-1 shadow-michi-1">
-            <FiSearch className={`${iconClass} mr-2`} />
-            <input
-              type="text"
-              placeholder="Buscar ciudad..."
-              value={query}
-              onChange={(e) => setQuery(e.target.value)}
-              className="bg-transparent outline-none text-sm text-[var(--dark)] dark:text-[var(--white)] placeholder-[var(--muted)]"
-            />
-          </form>
+          {/* Paso la prop obligatoria onSelectCity al SearchBar */}
+          <div className="hidden sm:block">
+            <SearchBar onSelectCity={handleSelectCity} />
+          </div>
 
           <button
-            ref={toggleRef}
-            onClick={() => setDark((s) => !s)}
+            onClick={() => {
+              setDark((s) => !s);
+              document.documentElement.setAttribute("data-theme", !dark ? "dark" : "light");
+            }}
             title="Cambiar tema"
             aria-label="Cambiar tema"
             className="h-9 w-9 rounded-full grid place-items-center hover:shadow-michi-1 transition bg-transparent"
           >
-            {dark ? <FiSun className={iconClass} /> : <FiMoon className={iconClass} />}
+            {dark ? <FiSun className="text-[var(--accent)]" /> : <FiMoon className="text-[var(--accent)]" />}
           </button>
 
           <Link to="/perfil" title="Perfil" className="h-9 w-9 rounded-full grid place-items-center hover:shadow-michi-1 transition bg-transparent">
-            <FiUser className={iconClass} />
+            <FiUser className="text-[var(--accent)]" />
           </Link>
 
           <button
@@ -89,9 +106,24 @@ export default function Navbar() {
       {menuOpen && (
         <div className="lg:hidden bg-[var(--panel)] dark:bg-[var(--panel)] border-t border-[var(--glass)] py-4 px-6 space-y-3 animate-fade-in">
           <Link to="/" className="block font-medium hover:text-[var(--accent)] transition">Inicio</Link>
-          <Link to="/ubicaciones" className="block font-medium hover:text-[var(--accent)] transition">Ubicaciones</Link>
+          <button
+            onClick={() => setLocOpen((s) => !s)}
+            className="block font-medium hover:text-[var(--accent)] transition text-left"
+          >
+            Ubicaciones
+          </button>
+          {/* mostrar recomendadas también en mobile menu */}
+          {locOpen && (
+            <div className="pl-4">
+              {recommendedLocations.map((loc, i) => (
+                <button key={i} onClick={() => handleSelectRecommended(loc.name)} className="block py-2 text-sm">
+                  {loc.name}
+                </button>
+              ))}
+            </div>
+          )}
         </div>
       )}
     </header>
-  )
+  );
 }

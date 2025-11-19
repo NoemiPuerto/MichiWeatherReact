@@ -1,36 +1,39 @@
-import type { IconType } from "react-icons"
-import { WiDaySunny, WiCloud, WiRain, WiNightClear } from "react-icons/wi"
+// src/components/ForecastHourly.tsx
+import type { IconType } from "react-icons";
+import { WiDaySunny, WiCloud, WiRain, WiNightClear } from "react-icons/wi";
 
-// Tipo del pronóstico horario
 export interface HourlyForecast {
-  label: string
-  icon?: string  // ahora opcional
-  temp: number
+  label: string;
+  icon?: string; // "sol", "nublado", "lluvia", "noche", "llovizna", "granizo", ...
+  temp: number;
 }
 
-// Props
 interface ForecastHourlyProps {
-  data?: HourlyForecast[]
+  data?: HourlyForecast[];
 }
 
-// Mapeo de nombres del JSON a React Icons
+// Mapeo string -> React Icon (IconType)
 const iconMap: Record<string, IconType> = {
   sol: WiDaySunny,
+  soleado: WiDaySunny,
   nublado: WiCloud,
+  parcial: WiCloud,
   lluvia: WiRain,
-  noche: WiNightClear,
+  lluvioso: WiRain,
   llovizna: WiRain,
   granizo: WiRain,
-}
+  noche: WiNightClear,
+};
 
 export default function ForecastHourly({ data = [] }: ForecastHourlyProps) {
-  if (!Array.isArray(data) || data.length === 0) return null
+  if (!Array.isArray(data) || data.length === 0) return null;
 
   return (
     <section aria-label="Pronóstico por horas" className="w-full">
       <div className="flex gap-4 min-w-max">
         {data.map((hour, i) => {
-          const IconComponent = hour.icon ? iconMap[hour.icon] : null
+          const IconComponent = hour.icon ? iconMap[hour.icon] : null;
+
           return (
             <div
               key={i}
@@ -40,8 +43,8 @@ export default function ForecastHourly({ data = [] }: ForecastHourlyProps) {
 
               {IconComponent ? (
                 <IconComponent
-                  className="w-8 h-8 my-2"
-                  style={{ color: "var(--accent)" }}
+                  className="text-[var(--dark)] dark:text-[var(--accent)] text-2xl my-2"
+                  aria-hidden
                 />
               ) : (
                 <div className="w-8 h-8 my-2" />
@@ -49,9 +52,9 @@ export default function ForecastHourly({ data = [] }: ForecastHourlyProps) {
 
               <p className="text-lg font-bold text-[var(--accent)]">{hour.temp}°</p>
             </div>
-          )
+          );
         })}
       </div>
     </section>
-  )
+  );
 }

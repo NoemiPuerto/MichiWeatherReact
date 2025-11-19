@@ -33,7 +33,7 @@ export default function Footer() {
 
         <div className="text-center md:text-left">
           <p className="font-semibold text-[var(--muted)] dark:text-[var(--white)] text-sm">
-            Desarrollado con 💚 por el equipo MichiWeather
+            Desarrollado con 💚 por el equipo MichiWeather!
           </p>
         </div>
 
@@ -46,9 +46,9 @@ export default function Footer() {
 
           {[
             { name: 'Maritza', url: 'https://github.com/Mezzikeen11' },
-            { name: 'Luz', url: 'https://github.com/LuzElizabeeth' },
-            { name: 'Rodolfo', url: 'https://github.com/Atkis1' },
             { name: 'Noemi', url: 'https://github.com/NoemiPuerto' },
+            { name: 'Luz', url: 'https://github.com/LuzElizabeeth' },
+            { name: 'Eduardo', url: 'https://github.com/Atkis1' },
           ].map((dev) => (
             <a
               key={dev.name}
