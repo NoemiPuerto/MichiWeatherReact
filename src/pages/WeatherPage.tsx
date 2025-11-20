@@ -49,7 +49,7 @@ export default function WeatherPage() {
     if (params.city) {
       loadByName(decodeURIComponent(params.city));
     } else {
-      loadByName("Cancún");
+      loadByName("Cancún, MX");
     }
   }, [params.city]);
 
