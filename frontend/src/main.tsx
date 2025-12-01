@@ -7,6 +7,7 @@ import "./globals.css";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import WeatherPage from "./pages/WeatherPage";
+import AuthPage from "./pages/AuthPage";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
@@ -15,6 +16,7 @@ createRoot(document.getElementById("root")!).render(
       <main className="min-h-screen pt-20 pb-5">
         <Routes>
           <Route path="/" element={<WeatherPage />} />
+          <Route path="/perfil" element={<AuthPage />} />
           <Route path="/weather/:city" element={<WeatherPage />} />
         </Routes>
       </main>
