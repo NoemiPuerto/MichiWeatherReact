@@ -1,47 +1,58 @@
-const bcrypt = require("bcrypt");
+const db = require("../config/db");
 const jwt = require("jsonwebtoken");
-const { crearUsuario, obtenerUsuarioPorEmail } = require("../models/usuarioModel");
-const { JWT_SECRET } = require("../config/jwt");
+const bcrypt = require("bcryptjs");
 
-// Registro
+const JWT_SECRET = "supersecreto123"; // cámbialo si quieres
+
+// ---------------------- REGISTRO ----------------------
 const register = async (req, res) => {
   try {
     const { nombre, email, password } = req.body;
 
-    // Verificar si usuario existe
-    const userExist = await obtenerUsuarioPorEmail(email);
-    if (userExist) return res.status(400).json({ message: "Usuario ya registrado" });
+    const existe = await db("usuarios").where({ email }).first();
+    if (existe) return res.status(400).json({ message: "Usuario ya registrado" });
 
-    // Hashear contraseña
-    const hash = await bcrypt.hash(password, 10);
+    const hashed = await bcrypt.hash(password, 10);
 
-    await crearUsuario(nombre, email, hash);
+    await db("usuarios").insert({
+      nombre,
+      email,
+      password: hashed,
+    });
 
-    res.status(201).json({ message: "Usuario creado correctamente" });
+    res.json({ message: "Usuario registrado correctamente" });
+
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: "Error en el registro" });
+    res.status(500).json({ message: "Error en el servidor" });
   }
 };
 
-// Login
+// ---------------------- LOGIN ----------------------
 const login = async (req, res) => {
   try {
     const { email, password } = req.body;
 
-    const user = await obtenerUsuarioPorEmail(email);
+    const user = await db("usuarios").where({ email }).first();
+
     if (!user) return res.status(400).json({ message: "Usuario no encontrado" });
 
-    const match = await bcrypt.compare(password, user.password);
-    if (!match) return res.status(400).json({ message: "Contraseña incorrecta" });
+    const esValida = await bcrypt.compare(password, user.password);
+    if (!esValida) return res.status(400).json({ message: "Contraseña incorrecta" });
 
-    // Crear token JWT
-    const token = jwt.sign({ id: user.id, email: user.email }, JWT_SECRET, { expiresIn: "1h" });
+    const token = jwt.sign({ id: user.id }, JWT_SECRET, { expiresIn: "1d" });
 
-    res.json({ token, nombre: user.nombre, email: user.email });
+    return res.json({
+      message: "Login exitoso",
+      token,
+      nombre: user.nombre,     // 👈 NECESARIO PARA TU FRONTEND
+      email: user.email,       // opcional
+      id: user.id              // opcional
+    });
+
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: "Error en el login" });
+    res.status(500).json({ message: "Error en el servidor" });
   }
 };
 

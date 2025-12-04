@@ -2,14 +2,13 @@ const express = require("express");
 const router = express.Router();
 const { register, login } = require("../controllers/authController");
 const authMiddleware = require("../middlewares/auth");
-const db = require("../config/db"); // tu conexión a MySQL/MariaDB
+const db = require("../config/db");
 
+// Rutas públicas
 router.post("/register", register);
 router.post("/login", login);
 
-module.exports = router;
-
-// Endpoint protegido para verificar sesión
+// Ruta protegida
 router.get("/me", authMiddleware, async (req, res) => {
   try {
     const user = await db("usuarios").where("id", req.userId).first();
